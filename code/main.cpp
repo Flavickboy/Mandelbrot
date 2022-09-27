@@ -20,7 +20,7 @@ int main()
 	Text messageText;
     Font font;
 
-    font.loadFromFile("fonts/KOMIKAP_.ttf");
+    font.loadFromFile("calibri_.ttf");
     messageText.setFont(font);
 
     messageText.setString("cheese, Gromit!");
