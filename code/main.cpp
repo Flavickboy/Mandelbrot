@@ -4,13 +4,31 @@
 
 int main()
 {
+
+		//Calculate Aspect Ratio
+	double screenwidth = VideoMode::getDesktopMode().width;
+	double screenheight = VideoMode::getDesktopMode().height;
+	double aspectRatio = screenwidth/screenheight;
+
 	// Create a video mode object
-	VideoMode vm(1920, 1080);
+	VideoMode vm(screenwidth, screenwidth);
+
 
 	// Create and open a window for the game
 	RenderWindow window(vm, "Mandelbrot", Style::Default);
 
-    Vector2f mousepos; 
+	Text messageText;
+    Font font;
+
+    font.loadFromFile("fonts/KOMIKAP_.ttf");
+    messageText.setFont(font);
+
+    messageText.setString("cheese, Gromit!");
+    messageText.setCharacterSize(20);
+    messageText.setFillColor(Color::Magenta);
+    messageText.setPosition(30, 30);
+
+
 
 
 	while (window.isOpen())
