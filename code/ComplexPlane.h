@@ -3,8 +3,10 @@
 
 #include <SFML/Graphics.hpp>
 #include <iostream>
+#include <ostream>
 #include <cmath>
 #include <vector>
+#include <complex>
 
 using namespace std;
 using namespace sf;
@@ -42,6 +44,7 @@ const float BASE_WIDTH = 4.0;
 const float BASE_HEIGHT = 4.0;
 const float BASE_ZOOM =0.5;
 
+enum class windowStatus{CALCULATING, DISPLAYING};
 
 
 
