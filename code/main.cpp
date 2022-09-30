@@ -17,16 +17,14 @@ int main()
 	// Create and open a window for the game
 	RenderWindow window(vm, "Mandelbrot", Style::Default);
 
+	//Declare Font and Text objects, Set font of messageText
 	Text messageText;
     Font font;
 
-    font.loadFromFile("calibri_.ttf");
+    font.loadFromFile("fonts/calibri.ttf");
     messageText.setFont(font);
 
-    messageText.setString("cheese, Gromit!");
-    messageText.setCharacterSize(20);
-    messageText.setFillColor(Color::Magenta);
-    messageText.setPosition(30, 30);
+	
 
 
 
@@ -72,6 +70,7 @@ int main()
 
 
 		// Show everything we just drew
+		window.draw(messageText);
 		window.display();
 
 

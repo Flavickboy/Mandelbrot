@@ -43,10 +43,16 @@ void ComplexPlane::setMouseLocation(Vector2f coord){
 
 void ComplexPlane::loadText(Text& text){
 
+    text.setString("cheese, Gromit!");
+    text.setCharacterSize(20);
+    text.setFillColor(Color::Magenta);
+    text.setPosition(500, 500);
+
 
 }
 
 size_t ComplexPlane::countIterations(Vector2f coord){
+
 
 
 
