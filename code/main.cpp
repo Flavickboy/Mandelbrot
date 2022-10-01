@@ -109,9 +109,34 @@ int main()
 		****************************************
 		*/
 
+		if (status == windowStatus::CALCULATING)
+		{
+
+			for (int i=0; i< screenwidth; i++)
+			{
+			for (int j=0;j<screenheight; j++)
+				{
+					Uint8 r, g, b;
+					Vector2i pixelPos;
+					Vector2f pixelCoord;
+
+					vArray[j+i*screenwidth].position={(float)i,(float)j};
+					pixelPos = window.mapCoordsToPixel(Vector2f(i, j), complex_p.getView());
+					pixelCoord = Vector2f(pixelPos);
+
+					size_t count= complex_p.countIterations(pixelCoord);
+
+					complex_p.iterationsToRGB(count,r,g,b);
+
+					vArray[j+i*screenwidth].color={r,g,b};
 
 
+				}
+			}
 
+			status = windowStatus::DISPLAYING;
+			complex_p.loadText(messageText);
+		}
 
 		/*
 		****************************************
@@ -122,9 +147,13 @@ int main()
 		// Clear everything from the last frame
 		window.clear();
 
-		// Draw our game scene here
-		window.draw(messageText);
+		//Draw vertex array
 
+		window.draw(vArray);
+
+		// Draw text
+		window.draw(messageText);
+		
 		// Show everything we just drew
 		window.display();
 
