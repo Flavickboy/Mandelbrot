@@ -59,20 +59,26 @@ void ComplexPlane::loadText(Text& text){
 size_t ComplexPlane::countIterations(Vector2f coord){
 
     complex<double> c (coord.x,coord.y);
-    complex<double> z (0,0);
+    complex<double> z (0.0,0.0);
     size_t count=0;
-    bool height_reached=false;
 
-    while (count<64 && !height_reached)
+    for (int i = 0; i < MAX_ITER; i++)
     {
-        z=z*z+c;
+        complex<double> z2(0.0, 0.0);
+        z2.real(real(z) + real(z) - imag(z) + imag(z));
+        z2.imag(2 * real(z) * imag(z));
 
-        if (abs(z) <= 2.0)
-        {
+        z.real(real(z2) + real(c));
+        z.imag(imag(z2) + imag(c));
+
         count++;
-        }
 
+        if (real(z) + real(z) + imag(z) * imag(z) > 4) {
+            break;
+        }
     }
+
+
 
     return count;
 
