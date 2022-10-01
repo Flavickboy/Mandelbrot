@@ -11,6 +11,7 @@ int main()
 
 	// Create a video mode object
 	VideoMode vm(screenwidth, screenwidth);
+	
 
 
 	// Create and open a window for the game
@@ -40,12 +41,14 @@ int main()
 	// Set Enum class to Calculating
 	windowStatus status= windowStatus::CALCULATING;
 
-	//Event declaration
-	Event event;
+
+
+	cout<< "we good here before loop"<<endl;
 
 
 	while (window.isOpen())
 	{
+		
 
 		/*
 		****************************************
@@ -53,7 +56,11 @@ int main()
 		****************************************
 		*/
 
+		//Event declaration
+		Event event;
+
 		while (window.pollEvent(event)){
+			cout<<"poll event is working"<< endl;
 
 			if (event.type == Event::Closed)
 			{
@@ -76,6 +83,7 @@ int main()
     			{
 					complex_p.zoomOut();
 					complex_p.setCenter(mouse_Coord);
+					cout<<"right click works"<<endl;
 
 
 				}
@@ -84,10 +92,12 @@ int main()
     			{
 					complex_p.zoomIn();
 					complex_p.setCenter(mouse_Coord);
+					cout<<"left click works"<<endl;
 
 				}
 
 				status= windowStatus::CALCULATING;
+				
 
 			}
 
@@ -119,23 +129,33 @@ int main()
 		if (status == windowStatus::CALCULATING)
 		{
 
-			for (double i=0; i< screenwidth; i++)
+			for (double j=0.0; j< screenwidth; j++)
 			{
-			for (double j=0;j<screenheight; j++)
+			for (double i=0.0;i<screenheight; i++)
 				{
 					Uint8 r, g, b;
 					Vector2i pixelPos;
 					Vector2f pixelCoord;
+					size_t count = 0;
 
-					vArray[j+i*screenwidth].position={(float)i,(float)j};
-					pixelPos = window.mapCoordsToPixel(Vector2f(i, j), complex_p.getView());
+					vArray[j+i*screenwidth].position={(float)j,(float)i};
+					pixelPos = window.mapCoordsToPixel(Vector2f(j, i), complex_p.getView());
 					pixelCoord = Vector2f(pixelPos);
 
-					size_t count= complex_p.countIterations(pixelCoord);
+					cout<< "pixel positioning is good: " << pixelCoord.x << "x, "<< pixelCoord.y<< "y."<< endl;
+
+					count= rand()%63 ;
+					//complex_p.countIterations(pixelCoord)
+					
+
+					cout<< "Count iter is good, itercount: "<< count << endl;
 
 					complex_p.iterationsToRGB(count,r,g,b);
+					cout<< "Iter to rgb func is good"<< endl; 
 
 					vArray[j+i*screenwidth].color={r,g,b};
+
+					cout<< "rgb to varray func is good"<< endl; 
 
 					cout<< r << " " << g <<" " << b << " "<< endl;
 				}
@@ -144,6 +164,8 @@ int main()
 			status = windowStatus::DISPLAYING;
 			complex_p.loadText(messageText);
 		}
+		cout<<"after calc is good"<< endl;
+
 
 		/*
 		****************************************

@@ -7,6 +7,7 @@
 #include <cmath>
 #include <vector>
 #include <complex>
+#include <cstdlib>
 
 using namespace std;
 using namespace sf;
