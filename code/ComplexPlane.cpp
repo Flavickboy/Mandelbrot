@@ -37,6 +37,11 @@ void ComplexPlane::setCenter(Vector2f coord){
     m_view.setCenter(coord);
 }
 
+View ComplexPlane::getView()
+{
+    return m_view;
+}
+
 void ComplexPlane::setMouseLocation(Vector2f coord){
     m_mouselocation= coord;
 }
@@ -98,7 +103,7 @@ void ComplexPlane::iterationsToRGB(size_t count, Uint8& r, Uint8& g, Uint8& b){
 
     else if (count>41)
     {
-        r=255/(0.75);
+        r=255*(0.75);
         g=255;
         b=255*(0);
 
@@ -106,7 +111,7 @@ void ComplexPlane::iterationsToRGB(size_t count, Uint8& r, Uint8& g, Uint8& b){
 
     else if (count>33)
     {
-        r=255/(0.5);
+        r=255*(0.5);
         g=255;
         b=255*(0);
 
