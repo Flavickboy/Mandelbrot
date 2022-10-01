@@ -1,5 +1,6 @@
 
 #include "ComplexPlane.h"
+#include <SFML/Graphics.hpp>
 
 
 ComplexPlane::ComplexPlane(float aspectRatio){
@@ -61,26 +62,21 @@ size_t ComplexPlane::countIterations(Vector2f coord){
     complex<double> c (coord.x,coord.y);
     complex<double> z (0.0,0.0);
     size_t count=0;
+    size_t final_count=0;
 
-    for (int i = 0; i < MAX_ITER; i++)
+     while (count < MAX_ITER || final_count > 0)
     {
-        complex<double> z2(0.0, 0.0);
-        z2.real(real(z) + real(z) - imag(z) + imag(z));
-        z2.imag(2 * real(z) * imag(z));
-
-        z.real(real(z2) + real(c));
-        z.imag(imag(z2) + imag(c));
-
+        z = z * z + c;
         count++;
-
-        if (real(z) + real(z) + imag(z) * imag(z) > 4) {
-            break;
+        if(abs(z) >= 2.0)
+        {
+            count = final_count;
         }
     }
 
 
 
-    return count;
+    return final_count;
 
 }
 

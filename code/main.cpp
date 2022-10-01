@@ -1,4 +1,5 @@
 #include "ComplexPlane.h"
+#include <SFML/Graphics.hpp>
 
 int main()
 {
@@ -24,6 +25,12 @@ int main()
 
     font.loadFromFile("fonts/calibri.ttf");
     messageText.setFont(font);
+
+	messageText.setString("cheese, Gromit!");
+    messageText.setCharacterSize(20);
+    messageText.setFillColor(Color::Magenta);
+    messageText.setPosition(500, 500);
+
 
 	//Declare Vertex Array, Set primitive type points, Set to size of screen
 	VertexArray vArray;
@@ -112,9 +119,9 @@ int main()
 		if (status == windowStatus::CALCULATING)
 		{
 
-			for (int i=0; i< screenwidth; i++)
+			for (double i=0; i< screenwidth; i++)
 			{
-			for (int j=0;j<screenheight; j++)
+			for (double j=0;j<screenheight; j++)
 				{
 					Uint8 r, g, b;
 					Vector2i pixelPos;
@@ -130,7 +137,7 @@ int main()
 
 					vArray[j+i*screenwidth].color={r,g,b};
 
-
+					cout<< r << " " << g <<" " << b << " "<< endl;
 				}
 			}
 
@@ -151,7 +158,6 @@ int main()
 
 		window.draw(vArray);
 
-		// Draw text
 		window.draw(messageText);
 		
 		// Show everything we just drew
