@@ -142,11 +142,12 @@ int main()
 					pixelPos = window.mapCoordsToPixel(Vector2f(j, i), complex_p.getView());
 					pixelCoord = Vector2f(pixelPos);
 
+					cout<<"Pixel position in for loop: "<< j << "x positon, "<< i<< "y position."<<endl;
+
 					cout<< "pixel positioning is good: " << pixelCoord.x << "x, "<< pixelCoord.y<< "y."<< endl;
 
-					count= rand()%63 ;
-					//complex_p.countIterations(pixelCoord)
-					
+					//count= rand()%63;
+					count= complex_p.countIterations(pixelCoord);
 
 					cout<< "Count iter is good, itercount: "<< count << endl;
 
@@ -158,6 +159,10 @@ int main()
 					cout<< "rgb to varray func is good"<< endl; 
 
 					cout<< r << " " << g <<" " << b << " "<< endl;
+
+					if (j>1920.0 && i>1080.0){
+						break;
+					}
 				}
 			}
 
