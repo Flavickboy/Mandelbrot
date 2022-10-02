@@ -6,7 +6,7 @@
 ComplexPlane::ComplexPlane(float aspectRatio){
 
     m_aspectratio = aspectRatio; 
-    m_view.setSize(BASE_WIDTH, -BASE_HEIGHT*m_aspectratio);
+    m_view.setSize(BASE_WIDTH, (-BASE_HEIGHT)*m_aspectratio);
     m_view.setCenter(0.0, 0.0);
     m_zoomcount=0;
 
@@ -51,7 +51,7 @@ void ComplexPlane::loadText(Text& text){
 
     text.setString("cheese, Gromit!");
     text.setCharacterSize(20);
-    text.setFillColor(Color::Magenta);
+    text.setFillColor(Color::Blue);
     text.setPosition(500, 500);
 
 
@@ -59,8 +59,8 @@ void ComplexPlane::loadText(Text& text){
 
 size_t ComplexPlane::countIterations(Vector2f coord){
 
-    complex<double> c (coord.x,coord.y);
-    complex<double> z (0.0,0.0);
+    complex<float> c (coord.x,coord.y);
+    complex<float> z (0.0,0.0);
     size_t count =0;
 
     while (count< MAX_ITER && abs(z)<2)
@@ -75,7 +75,32 @@ size_t ComplexPlane::countIterations(Vector2f coord){
 
 void ComplexPlane::iterationsToRGB(size_t count, Uint8& r, Uint8& g, Uint8& b){
 
-    if (count == MAX_ITER)
+    if (count ==MAX_ITER)
+    {
+        r=0;
+        g=0;
+        b=0;
+
+    }
+
+    else{
+    r=255;
+    g=0;
+    b=255;
+
+    for (size_t i =0; i<count; i++)
+    {
+
+        r-=3;
+        g+=4;
+        b-=2;
+
+    }
+    
+    }
+    
+
+    /*if (count == MAX_ITER)
     {
         r=0;
         g=0;
@@ -114,7 +139,7 @@ void ComplexPlane::iterationsToRGB(size_t count, Uint8& r, Uint8& g, Uint8& b){
 
     else if (count>25)
     {
-        r=255*(0);
+        r=255*(0)+(count);
         g=255;
         b=255*(0.5);
 
@@ -122,15 +147,15 @@ void ComplexPlane::iterationsToRGB(size_t count, Uint8& r, Uint8& g, Uint8& b){
 
     else if (count>17)
     {
-        r=255*(0);
-        g=255*(0.25);
-        b=255;
+        r=255*(0)+(count*2);
+        g=255*(0.25)-(count*2);
+        b=(255*(0.33))-(count*2);
 
     }
 
     else if (count>9)
     {
-        r=255*(0.33);
+        r=(255*(0.33))-(count*2);
         g=255*(0);
         b=255;
 
@@ -138,37 +163,9 @@ void ComplexPlane::iterationsToRGB(size_t count, Uint8& r, Uint8& g, Uint8& b){
 
     else
     {
-        r=255;
+        r=(255)-(count*4);
         g=255*(0);
         b=255;
-    }
   
-
+*/
 }
-
-/*
-
-Alternative function for countIter:
-
-complex<double> c (coord.x,coord.y);
-    complex<double> z (0.0,0.0);
-    size_t count=0;
-
-     for (unsigned int k = 0; k<MAX_ITER; k++)
-    {
-        complex<long double> z2(0.0,0.0);
-        z2.real(real(z)+real(z)-imag(z)+imag(z));
-        z2.imag(2* real(z)*imag(z));
-
-        z.real(real(z2)+real(c));
-        z.imag(imag(z2)+imag(c));
-
-        count++;
-
-        if(real(z)* real(z) + imag(z)*imag(z) >4.0)
-        {
-            break;
-
-        }
-    }
-    return count;*/
