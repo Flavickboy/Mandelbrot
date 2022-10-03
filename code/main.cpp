@@ -3,11 +3,13 @@
 
 void calculation(float screenwidth, float screenheight, ComplexPlane &complex_p, RenderWindow &window, VertexArray &vArray, float section)
 {
-	float screenSection= (screenheight/8)*section;
+	float screenSectionSize= (screenwidth/8)*section;
+	float screenSectiontop= screenSectionSize;
+	float screenSectionbottom= screenSectiontop-screenSectionSize;
 
-for (float j=0.0; j< screenwidth; j++)
+for (float j=screenSectionbottom; j< screenSectiontop; j++)
 {
-for (float i=0.0; i< screenSection; i++)
+for (float i=0.0; i< screenheight; i++)
 	{
 	Uint8 r, g, b;
 	Vector2f pixelCoord;
@@ -22,7 +24,7 @@ for (float i=0.0; i< screenSection; i++)
 
 	vArray[j+i*screenwidth].color={r,g,b};
 
-		if (j>screenwidth&& i> screenSection)
+		if (j>screenSectiontop&& i> screenheight)
 		{
 			break;
 		}
@@ -144,6 +146,9 @@ int main()
 
 		if (status == windowStatus::CALCULATING)
 		{
+
+
+
 			thread thr1 {calculation, screenwidth, screenheight, ref(complex_p), ref(window), ref(vArray),1.0};
 			thread thr2 {calculation, screenwidth, screenheight, ref(complex_p), ref(window), ref(vArray),2.0};
 			thread thr3 {calculation, screenwidth, screenheight, ref(complex_p), ref(window), ref(vArray),3.0};
@@ -152,6 +157,14 @@ int main()
 			thread thr6 {calculation, screenwidth, screenheight, ref(complex_p), ref(window), ref(vArray),6.0};
 			thread thr7 {calculation, screenwidth, screenheight, ref(complex_p), ref(window), ref(vArray),7.0};
 			thread thr8 {calculation, screenwidth, screenheight, ref(complex_p), ref(window), ref(vArray),8.0};
+			thread thr9 {calculation, screenwidth, screenheight, ref(complex_p), ref(window), ref(vArray),1.0};
+			thread thr10 {calculation, screenwidth, screenheight, ref(complex_p), ref(window), ref(vArray),2.0};
+			thread thr11 {calculation, screenwidth, screenheight, ref(complex_p), ref(window), ref(vArray),3.0};
+			thread thr12 {calculation, screenwidth, screenheight, ref(complex_p), ref(window), ref(vArray),4.0};
+			thread thr13 {calculation, screenwidth, screenheight, ref(complex_p), ref(window), ref(vArray),5.0};
+			thread thr14 {calculation, screenwidth, screenheight, ref(complex_p), ref(window), ref(vArray),6.0};
+			thread thr15 {calculation, screenwidth, screenheight, ref(complex_p), ref(window), ref(vArray),7.0};
+			thread thr16 {calculation, screenwidth, screenheight, ref(complex_p), ref(window), ref(vArray),8.0};
 			
 			thr1.join();
 			thr2.join();
@@ -161,6 +174,14 @@ int main()
 			thr6.join();
 			thr7.join();
 			thr8.join();
+			thr9.join();
+			thr10.join();
+			thr11.join();
+			thr12.join();
+			thr13.join();
+			thr14.join();
+			thr15.join();
+			thr16.join();
 
 			status = windowStatus::DISPLAYING;
 			complex_p.loadText(messageText);
