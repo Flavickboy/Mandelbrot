@@ -3,7 +3,7 @@
 
 void calculation(float screenwidth, float screenheight, ComplexPlane &complex_p, RenderWindow &window, VertexArray &vArray, float section)
 {
-	float screenSectionSize= (screenwidth/8)*section;
+	float screenSectionSize= (screenwidth/16)*section;
 	float screenSectiontop= screenSectionSize;
 	float screenSectionbottom= screenSectiontop-screenSectionSize;
 
