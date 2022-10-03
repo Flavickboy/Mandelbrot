@@ -73,9 +73,11 @@ size_t ComplexPlane::countIterations(Vector2f coord){
 
 }
 
-void ComplexPlane::iterationsToRGB(size_t count, Uint8& r, Uint8& g, Uint8& b){
+void ComplexPlane::iterationsToRGB(size_t Count, Uint8& r, Uint8& g, Uint8& b){
 
-    if (count ==MAX_ITER)
+    float count = (float)Count;
+
+    if (count == MAX_ITER)
     {
         r=0;
         g=0;
@@ -83,89 +85,35 @@ void ComplexPlane::iterationsToRGB(size_t count, Uint8& r, Uint8& g, Uint8& b){
 
     }
 
-    else{
-    r=255;
-    g=0;
-    b=255;
-
-    for (size_t i =0; i<count; i++)
+    else if(count<= 63 && count>=33)//yellow to red
     {
-
-        r-=3;
-        g+=4;
-        b-=2;
+        r= 255;
+        g= (255-(8.5*(count - 33)));
+        b= 0;
 
     }
-    
-    }
-    
-
-    /*if (count == MAX_ITER)
+    else if(count<=32 && count >= 17)// green to yellow
     {
-        r=0;
-        g=0;
-        b=0;
+        r= (17*(count-17)); 
+        g= 255;
+        b= 0;
 
     }
 
-    else if (count>57){
-        r=255;
-        g=255*(0);
-        b=255*(0);
-
-    }
-
-    else if (count>49){
-        r=255;
-        g=255/2;
-        b=255*(0);
-    }
-
-    else if (count>41)
+    else if(count<=16 && count >= 5)//turquoise to green
     {
-        r=255*(0.75);
-        g=255;
-        b=255*(0);
+        r= 0;
+        g= 255;
+        b= (255 - 23*(count -5)); // 0 at the low end
 
     }
 
-    else if (count>33)
+    else if(count <= 4 && count >=0)// blue to turquiose
     {
-        r=255*(0.5);
-        g=255;
-        b=255*(0);
-
+        r= 0;
+        g= 63*(4-count); // 255 at the low end
+        b= 255;
     }
 
-    else if (count>25)
-    {
-        r=255*(0)+(count);
-        g=255;
-        b=255*(0.5);
 
-    }
-
-    else if (count>17)
-    {
-        r=255*(0)+(count*2);
-        g=255*(0.25)-(count*2);
-        b=(255*(0.33))-(count*2);
-
-    }
-
-    else if (count>9)
-    {
-        r=(255*(0.33))-(count*2);
-        g=255*(0);
-        b=255;
-
-    }
-
-    else
-    {
-        r=(255)-(count*4);
-        g=255*(0);
-        b=255;
-  
-*/
 }

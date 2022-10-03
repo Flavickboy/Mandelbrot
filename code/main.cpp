@@ -1,6 +1,7 @@
 #include "ComplexPlane.h"
 #include <SFML/Graphics.hpp>
 
+
 int main()
 {
 
@@ -130,7 +131,6 @@ int main()
 					vArray[j+i*screenwidth].position={(float)j,(float)i};
 					pixelCoord = window.mapPixelToCoords(Vector2i(j, i),complex_p.getView());
 
-					//count= rand()%63;
 					count= complex_p.countIterations(pixelCoord);
 
 					complex_p.iterationsToRGB(count,r,g,b);
