@@ -1,6 +1,37 @@
 #include "ComplexPlane.h"
 #include <SFML/Graphics.hpp>
 
+void calculation(float screenwidth, float screenheight, ComplexPlane &complex_p, RenderWindow &window, VertexArray &vArray, float section)
+{
+	float screenSection= (screenheight/8)*section;
+
+for (float j=0.0; j< screenwidth; j++)
+{
+for (float i=0.0; i< screenSection; i++)
+	{
+	Uint8 r, g, b;
+	Vector2f pixelCoord;
+	size_t count = 0;
+
+	vArray[j+i*screenwidth].position={(float)j,(float)i};
+	pixelCoord = window.mapPixelToCoords(Vector2i(j, i),complex_p.getView());
+
+	count= complex_p.countIterations(pixelCoord);
+
+	complex_p.iterationsToRGB(count,r,g,b);
+
+	vArray[j+i*screenwidth].color={r,g,b};
+
+		if (j>screenwidth&& i> screenSection)
+		{
+			break;
+		}
+
+	}
+}
+
+}
+
 
 int main()
 {
@@ -13,7 +44,6 @@ int main()
 	// Create a video mode object
 	VideoMode vm(screenwidth, screenwidth);
 	
-
 
 	// Create and open a window for the game
 	RenderWindow window(vm, "Mandelbrot", Style::Default);
@@ -36,9 +66,6 @@ int main()
 	// Set Enum class to Calculating
 	windowStatus status= windowStatus::CALCULATING;
 
-
-
-	cout<< "we good here before loop"<<endl;
 
 
 	while (window.isOpen())
@@ -75,7 +102,6 @@ int main()
 					complex_p.zoomOut();
 					complex_p.setCenter(mouse_Coord);
 
-					cout<< "Right Mouse works, X and y coord:"<< mouse_Coord.x<< " "<< event.mouseButton.y<< endl; 
 
 
 				}
@@ -84,7 +110,6 @@ int main()
     			{
 					complex_p.zoomIn();
 					complex_p.setCenter(mouse_Coord);
-					cout<< "Left Mouse works, X and y coord:"<< mouse_Coord.x<< " "<< mouse_Coord.y<< endl; 
 
 
 				}
@@ -119,30 +144,23 @@ int main()
 
 		if (status == windowStatus::CALCULATING)
 		{
-
-			for (float j=0.0; j< screenwidth; j++)
-			{
-			for (float i=0.0;i<screenheight; i++)
-				{
-					Uint8 r, g, b;
-					Vector2f pixelCoord;
-					size_t count = 0;
-
-					vArray[j+i*screenwidth].position={(float)j,(float)i};
-					pixelCoord = window.mapPixelToCoords(Vector2i(j, i),complex_p.getView());
-
-					count= complex_p.countIterations(pixelCoord);
-
-					complex_p.iterationsToRGB(count,r,g,b);
-
-					vArray[j+i*screenwidth].color={r,g,b};
-
-					if (j>1920.0 && i>1080.0){
-						break;
-					}
-
-				}
-			}
+			thread thr1 {calculation, screenwidth, screenheight, ref(complex_p), ref(window), ref(vArray),1.0};
+			thread thr2 {calculation, screenwidth, screenheight, ref(complex_p), ref(window), ref(vArray),2.0};
+			thread thr3 {calculation, screenwidth, screenheight, ref(complex_p), ref(window), ref(vArray),3.0};
+			thread thr4 {calculation, screenwidth, screenheight, ref(complex_p), ref(window), ref(vArray),4.0};
+			thread thr5 {calculation, screenwidth, screenheight, ref(complex_p), ref(window), ref(vArray),5.0};
+			thread thr6 {calculation, screenwidth, screenheight, ref(complex_p), ref(window), ref(vArray),6.0};
+			thread thr7 {calculation, screenwidth, screenheight, ref(complex_p), ref(window), ref(vArray),7.0};
+			thread thr8 {calculation, screenwidth, screenheight, ref(complex_p), ref(window), ref(vArray),8.0};
+			
+			thr1.join();
+			thr2.join();
+			thr3.join();
+			thr4.join();
+			thr5.join();
+			thr6.join();
+			thr7.join();
+			thr8.join();
 
 			status = windowStatus::DISPLAYING;
 			complex_p.loadText(messageText);
