@@ -57,7 +57,7 @@ void ComplexPlane::loadText(Text& text){
     textLayout << "Mandelbrot Set"<< endl 
     << "Center: ("<< currCenter.x << ", "<< currCenter.y<< ")"<< endl
     << "Cursor: ("<< m_mouselocation.x << ", "<< m_mouselocation.y<< ")"<< endl
-    << "Left click to zoom in" << endl << "Right click to zoom out"; 
+    << "Left click to zoom in" << endl << "Right click to zoom out"<< endl; 
 
     string output = textLayout.str();
 

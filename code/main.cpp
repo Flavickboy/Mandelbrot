@@ -49,10 +49,10 @@ int main()
 	//Calculate Aspect Ratio
 	float screenwidth = VideoMode::getDesktopMode().width;
 	float screenheight = VideoMode::getDesktopMode().height;
-	float aspectRatio = ((screenwidth/screenheight)-1.4);
+	float aspectRatio = (screenheight/screenwidth);
 
 	// Create a video mode object
-	VideoMode vm(screenwidth, screenwidth);
+	VideoMode vm(screenwidth, screenheight);
 	
 
 	// Create and open a window for the game
@@ -160,7 +160,7 @@ int main()
 		if (status == windowStatus::CALCULATING)
 		{
 
-			// Threads split the calculation part into 4 different parts of the screen
+			// Threads split the calculation part into 16 different columns of the screen
 
 			thread thr1 {calculation, screenwidth, screenheight, ref(complex_p), ref(window), ref(vArray),1.0};
 			thread thr2 {calculation, screenwidth, screenheight, ref(complex_p), ref(window), ref(vArray),2.0};
