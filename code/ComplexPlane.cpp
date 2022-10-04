@@ -72,8 +72,10 @@ void ComplexPlane::loadText(Text& text){
 
 size_t ComplexPlane::countIterations(Vector2f coord){
 
-    complex<float> c (coord.x,coord.y);
-    complex<float> z (0.0,0.0);
+    double coord_x = coord.x;
+    double coord_y = coord.y;
+    complex<double> c (coord_x,coord_y);
+    complex<double> z (0.0,0.0);
     size_t count =0;
 
     while (count< MAX_ITER && abs(z)<2)

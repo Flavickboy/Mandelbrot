@@ -49,7 +49,7 @@ int main()
 	//Calculate Aspect Ratio
 	float screenwidth = VideoMode::getDesktopMode().width;
 	float screenheight = VideoMode::getDesktopMode().height;
-	float aspectRatio = screenwidth/screenheight;
+	float aspectRatio = (screenwidth/screenheight)-1.1;
 
 	// Create a video mode object
 	VideoMode vm(screenwidth, screenwidth);
