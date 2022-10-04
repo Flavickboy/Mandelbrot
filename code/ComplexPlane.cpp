@@ -126,7 +126,7 @@ void ComplexPlane::iterationsToRGB(size_t Count, Uint8& r, Uint8& g, Uint8& b){
     else if(count <= (MAX_ITER/16) && count >=0)// blue to turquiose
     {
         r= 0;
-        g= (MAX_ITER/16)*((MAX_ITER/16)-count); // 255 at the low end
+        g= (255/(MAX_ITER/16))*((MAX_ITER/16)-count); // 255 at the low end
         b= 255;
     }
 

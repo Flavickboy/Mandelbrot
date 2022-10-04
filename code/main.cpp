@@ -11,7 +11,7 @@
 
 void calculation(float screenwidth, float screenheight, ComplexPlane &complex_p, RenderWindow &window, VertexArray &vArray, float section)
 {
-	float screenSectionSize= (screenwidth/4);
+	float screenSectionSize= (screenwidth/8);
 	float screenSectiontop= screenSectionSize*section;
 	float screenSectionbottom= screenSectiontop-screenSectionSize;
 
@@ -166,12 +166,20 @@ int main()
 			thread thr2 {calculation, screenwidth, screenheight, ref(complex_p), ref(window), ref(vArray),2.0};
 			thread thr3 {calculation, screenwidth, screenheight, ref(complex_p), ref(window), ref(vArray),3.0};
 			thread thr4 {calculation, screenwidth, screenheight, ref(complex_p), ref(window), ref(vArray),4.0};
+			thread thr5 {calculation, screenwidth, screenheight, ref(complex_p), ref(window), ref(vArray),5.0};
+			thread thr6 {calculation, screenwidth, screenheight, ref(complex_p), ref(window), ref(vArray),6.0};
+			thread thr7 {calculation, screenwidth, screenheight, ref(complex_p), ref(window), ref(vArray),7.0};
+			thread thr8 {calculation, screenwidth, screenheight, ref(complex_p), ref(window), ref(vArray),8.0};
 
 			// Threads join at the end to ensure smooth frames. 
 			thr1.join();
 			thr2.join();
 			thr3.join();
 			thr4.join();
+			thr5.join();
+			thr6.join();
+			thr7.join();
+			thr8.join();
 
 			status = windowStatus::DISPLAYING;
 
