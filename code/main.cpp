@@ -11,7 +11,7 @@
 
 void calculation(float screenwidth, float screenheight, ComplexPlane &complex_p, RenderWindow &window, VertexArray &vArray, float section)
 {
-	float screenSectionSize= (screenwidth/8);
+	float screenSectionSize= (screenwidth/THREADS);
 	float screenSectiontop= screenSectionSize*section;
 	float screenSectionbottom= screenSectiontop-screenSectionSize;
 
@@ -170,6 +170,14 @@ int main()
 			thread thr6 {calculation, screenwidth, screenheight, ref(complex_p), ref(window), ref(vArray),6.0};
 			thread thr7 {calculation, screenwidth, screenheight, ref(complex_p), ref(window), ref(vArray),7.0};
 			thread thr8 {calculation, screenwidth, screenheight, ref(complex_p), ref(window), ref(vArray),8.0};
+			thread thr9 {calculation, screenwidth, screenheight, ref(complex_p), ref(window), ref(vArray),9.0};
+			thread thr10 {calculation, screenwidth, screenheight, ref(complex_p), ref(window), ref(vArray),10.0};
+			thread thr11 {calculation, screenwidth, screenheight, ref(complex_p), ref(window), ref(vArray),11.0};
+			thread thr12 {calculation, screenwidth, screenheight, ref(complex_p), ref(window), ref(vArray),12.0};
+			thread thr13 {calculation, screenwidth, screenheight, ref(complex_p), ref(window), ref(vArray),13.0};
+			thread thr14 {calculation, screenwidth, screenheight, ref(complex_p), ref(window), ref(vArray),14.0};
+			thread thr15 {calculation, screenwidth, screenheight, ref(complex_p), ref(window), ref(vArray),15.0};
+			thread thr16 {calculation, screenwidth, screenheight, ref(complex_p), ref(window), ref(vArray),16.0};
 
 			// Threads join at the end to ensure smooth frames. 
 			thr1.join();
@@ -180,6 +188,14 @@ int main()
 			thr6.join();
 			thr7.join();
 			thr8.join();
+			thr9.join();
+			thr10.join();
+			thr11.join();
+			thr12.join();
+			thr13.join();
+			thr14.join();
+			thr15.join();
+			thr16.join();
 
 			status = windowStatus::DISPLAYING;
 

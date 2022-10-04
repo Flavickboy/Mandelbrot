@@ -47,6 +47,7 @@ const unsigned int MAX_ITER =256; //Only use powers of 2 please
 const float BASE_WIDTH = 4.0;
 const float BASE_HEIGHT = 4.0;
 const float BASE_ZOOM =0.5;
+const float THREADS = 16;
 
 enum class windowStatus{CALCULATING, DISPLAYING};
 
