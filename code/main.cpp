@@ -56,7 +56,7 @@ int main()
 	
 
 	// Create and open a window for the game
-	RenderWindow window(vm, "Mandelbrot", Style::Default);
+	RenderWindow window(vm, "Mandelbrot!!!", Style::Default);
 
 	//Declare ComplexPlane object
 	ComplexPlane complex_p(aspectRatio);

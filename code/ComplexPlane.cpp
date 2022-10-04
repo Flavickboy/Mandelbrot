@@ -63,9 +63,9 @@ void ComplexPlane::loadText(Text& text){
 
 
     text.setString(output);
-    text.setCharacterSize(20);
-    text.setFillColor(Color::White);
-    text.setPosition(100, 100);
+    text.setCharacterSize(30);
+    text.setFillColor(Color::Magenta);
+    text.setPosition(50,40);
 
 
 }
