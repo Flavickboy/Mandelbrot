@@ -100,33 +100,33 @@ void ComplexPlane::iterationsToRGB(size_t Count, Uint8& r, Uint8& g, Uint8& b){
 
     }
 
-    else if(count<= 63 && count>=33)//yellow to red
+    else if(count<= (MAX_ITER-1) && count>=((MAX_ITER/2)+1))//yellow to red
     {
         r= 255;
-        g= (255-(8.5*(count - 33)));
+        g= (255-((255/((MAX_ITER-1)-(MAX_ITER/2)+1))*(count - ((MAX_ITER/2)+1))));
         b= 0;
 
     }
-    else if(count<=32 && count >= 17)// green to yellow
+    else if(count<=(MAX_ITER/2) && count >= ((MAX_ITER/4)+1))// green to yellow
     {
-        r= (17*(count-17)); 
+        r= ((255/((MAX_ITER/2)-(MAX_ITER/4)+1))*(count-(MAX_ITER/4)+1)); 
         g= 255;
         b= 0;
 
     }
 
-    else if(count<=16 && count >= 5)//turquoise to green
+    else if(count<=(MAX_ITER/4) && count >= (MAX_ITER/16)+1)//turquoise to green
     {
         r= 0;
         g= 255;
-        b= (255 - 23*(count -5)); // 0 at the low end
+        b= (255-((255/((MAX_ITER/4)-(MAX_ITER/16)+1))*(count -((MAX_ITER/16)+1)))); // 0 at the low end
 
     }
 
-    else if(count <= 4 && count >=0)// blue to turquiose
+    else if(count <= (MAX_ITER/16) && count >=0)// blue to turquiose
     {
         r= 0;
-        g= 63*(4-count); // 255 at the low end
+        g= (MAX_ITER/16)*((MAX_ITER/16)-count); // 255 at the low end
         b= 255;
     }
 
