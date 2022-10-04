@@ -49,10 +49,23 @@ void ComplexPlane::setMouseLocation(Vector2f coord){
 
 void ComplexPlane::loadText(Text& text){
 
-    text.setString("cheese, Gromit!");
+    ostringstream textLayout;
+    Vector2f currCenter = m_view.getCenter();
+
+
+
+    textLayout << "Mandelbrot Set"<< endl 
+    << "Center: ("<< currCenter.x << ", "<< currCenter.y<< ")"<< endl
+    << "Cursor: ("<< m_mouselocation.x << ", "<< m_mouselocation.y<< ")"<< endl
+    << "Left click to zoom in" << endl << "Right click to zoom out"; 
+
+    string output = textLayout.str();
+
+
+    text.setString(output);
     text.setCharacterSize(20);
-    text.setFillColor(Color::Blue);
-    text.setPosition(500, 500);
+    text.setFillColor(Color::White);
+    text.setPosition(100, 100);
 
 
 }

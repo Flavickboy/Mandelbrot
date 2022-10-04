@@ -1,10 +1,18 @@
 #include "ComplexPlane.h"
 #include <SFML/Graphics.hpp>
 
+/*
+	Programer: Derek Vergara
+	Class: cisp 400
+	Professor: Ryan Hermle
+	Due Date: 10/3/2022
+
+*/
+
 void calculation(float screenwidth, float screenheight, ComplexPlane &complex_p, RenderWindow &window, VertexArray &vArray, float section)
 {
-	float screenSectionSize= (screenwidth/16)*section;
-	float screenSectiontop= screenSectionSize;
+	float screenSectionSize= (screenwidth/4);
+	float screenSectiontop= screenSectionSize*section;
 	float screenSectionbottom= screenSectiontop-screenSectionSize;
 
 for (float j=screenSectionbottom; j< screenSectiontop; j++)
@@ -68,6 +76,9 @@ int main()
 	// Set Enum class to Calculating
 	windowStatus status= windowStatus::CALCULATING;
 
+	// Test outputs
+	cout<< "Screenwidth: "<< screenwidth << endl << "Screenheight: "<< screenheight<< endl << "AspectRatio: "<< aspectRatio <<endl;
+
 
 
 	while (window.isOpen())
@@ -116,6 +127,7 @@ int main()
 
 				}
 
+				//Start calculating process
 				status= windowStatus::CALCULATING;
 				
 
@@ -135,6 +147,7 @@ int main()
 
 		if (Keyboard::isKeyPressed(Keyboard::Escape))
 		{
+			//Self explanatory
 			window.close();
 		}
 
@@ -147,52 +160,30 @@ int main()
 		if (status == windowStatus::CALCULATING)
 		{
 
-
+			// Threads split the calculation part into 4 different parts of the screen
 
 			thread thr1 {calculation, screenwidth, screenheight, ref(complex_p), ref(window), ref(vArray),1.0};
 			thread thr2 {calculation, screenwidth, screenheight, ref(complex_p), ref(window), ref(vArray),2.0};
 			thread thr3 {calculation, screenwidth, screenheight, ref(complex_p), ref(window), ref(vArray),3.0};
 			thread thr4 {calculation, screenwidth, screenheight, ref(complex_p), ref(window), ref(vArray),4.0};
-			thread thr5 {calculation, screenwidth, screenheight, ref(complex_p), ref(window), ref(vArray),5.0};
-			thread thr6 {calculation, screenwidth, screenheight, ref(complex_p), ref(window), ref(vArray),6.0};
-			thread thr7 {calculation, screenwidth, screenheight, ref(complex_p), ref(window), ref(vArray),7.0};
-			thread thr8 {calculation, screenwidth, screenheight, ref(complex_p), ref(window), ref(vArray),8.0};
-			thread thr9 {calculation, screenwidth, screenheight, ref(complex_p), ref(window), ref(vArray),1.0};
-			thread thr10 {calculation, screenwidth, screenheight, ref(complex_p), ref(window), ref(vArray),2.0};
-			thread thr11 {calculation, screenwidth, screenheight, ref(complex_p), ref(window), ref(vArray),3.0};
-			thread thr12 {calculation, screenwidth, screenheight, ref(complex_p), ref(window), ref(vArray),4.0};
-			thread thr13 {calculation, screenwidth, screenheight, ref(complex_p), ref(window), ref(vArray),5.0};
-			thread thr14 {calculation, screenwidth, screenheight, ref(complex_p), ref(window), ref(vArray),6.0};
-			thread thr15 {calculation, screenwidth, screenheight, ref(complex_p), ref(window), ref(vArray),7.0};
-			thread thr16 {calculation, screenwidth, screenheight, ref(complex_p), ref(window), ref(vArray),8.0};
-			
+
+			// Threads join at the end to ensure smooth frames. 
 			thr1.join();
 			thr2.join();
 			thr3.join();
 			thr4.join();
-			thr5.join();
-			thr6.join();
-			thr7.join();
-			thr8.join();
-			thr9.join();
-			thr10.join();
-			thr11.join();
-			thr12.join();
-			thr13.join();
-			thr14.join();
-			thr15.join();
-			thr16.join();
 
 			status = windowStatus::DISPLAYING;
-			complex_p.loadText(messageText);
 
 		}
+		complex_p.loadText(messageText);
 
 		/*
 		****************************************
 		Draw the scene
 		****************************************
 		*/
+		
 
 		// Clear everything from the last frame
 		window.clear();
@@ -200,6 +191,8 @@ int main()
 		//Draw vertex array
 
 		window.draw(vArray);
+
+		//dra
 
 		window.draw(messageText);
 		
